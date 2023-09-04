@@ -1,37 +1,25 @@
-const express = require('express')
-const cors = require('cors')
-const morgan = require('morgan')
+require('dotenv').config()
 
-const http = require('http')
-const { Server } = require('socket.io')
+const express = require('express')
+const mongoose = require('mongoose')
 
 const app = express()
-const server = http.createServer(app)
-const io = new Server(server, {
-    cors: {
-        origin: process.env.FRONTEND_URL,
-        methods: ['GET', 'POST'],
-        credentials: true,
-    },
-})
 
-app.use(cors())
-app.use(morgan('dev'))
+const combineRoutes = require('./src/routes')
+const combineMiddleware = require('./src/utils')
 
-app.get('/server', (req, res) => {
+combineMiddleware(app)
+combineRoutes(app)
+
+app.get('/', (req, res) => {
     return res.status(200).json({
-        message: "Server Up and Running!"
+        message: "Server is up!"
     })
 })
 
-app.get('*', (req, res) => {
-    return res.status(400).json({
-        message: "Request Not Found!"
-    })
-})
-
-const port = process.env.PORT || 8080
-
-server.listen(port, () => {
-    console.log(`---LISTENING ON PORT ${port}---`)
+app.listen(8080, () => {
+    console.log("---SERVER LISTENING AT PORT 8080---")
+    mongoose.connect(process.env.MONGO_URI)
+    .then(() => { console.log("---Connected to DB!---") })
+    .catch(() => { console.log("----DB Connection Failed!---")})
 })
