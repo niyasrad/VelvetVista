@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const router = require('express').Router()
 const User =  require('../models/user.model')
+const authVer = require('../utils/auth.utils')
 
 router.post('/signup', async(req, res) => {
 
@@ -102,6 +103,15 @@ router.post('/login', async (req, res) => {
             message: "Something went wrong!"
         })
     }
+
+})
+
+router.get('/checkauth', authVer, (req, res) => {
+    
+    return res.status(200).json({
+        username: req.username,
+        message: "Logged In!"
+    })
 
 })
 
