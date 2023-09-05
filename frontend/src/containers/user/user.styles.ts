@@ -29,6 +29,7 @@ export const SignerInsance = styled.div`
     align-items: center;
     justify-content: space-around;
     padding: 3rem 0;
+    gap: 2rem;
     color: #9F9F9F;
 
     a {
