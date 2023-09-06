@@ -2,12 +2,16 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const { createServer } = require('http')
 
 const app = express()
+const httpServer = createServer(app)
 
 const combineRoutes = require('./src/routes')
 const combineMiddleware = require('./src/utils')
+const combineSockets = require('./src/sockets')
 
+combineSockets(httpServer)
 combineMiddleware(app)
 combineRoutes(app)
 
@@ -19,7 +23,7 @@ app.get('/', (req, res) => {
 
 const portNumber = process.env.PORT || 8080
 
-app.listen(portNumber, () => {
+httpServer.listen(portNumber, () => {
     console.log(`---SERVER LISTENING AT PORT ${portNumber}---`)
     mongoose.connect(process.env.MONGO_URI)
     .then(() => { console.log("---Connected to DB!---") })
