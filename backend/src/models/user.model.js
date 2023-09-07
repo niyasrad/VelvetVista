@@ -14,7 +14,13 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    previousContacts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
 })
 
 module.exports = mongoose.model("User", userSchema)

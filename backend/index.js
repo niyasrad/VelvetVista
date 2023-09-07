@@ -11,9 +11,9 @@ const combineRoutes = require('./src/routes')
 const combineMiddleware = require('./src/utils')
 const combineSockets = require('./src/sockets')
 
-combineSockets(httpServer)
 combineMiddleware(app)
 combineRoutes(app)
+combineSockets(httpServer)
 
 app.get('/', (req, res) => {
     return res.status(200).json({
