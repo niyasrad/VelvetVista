@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken')
 const { Server } = require("socket.io")
 
 const roomSocket = require('./room.socket')
 const messageSocket = require('./message.socket')
+const authSocket = require('./auth.socket')
 
 const combineSockets = (server) => {
 
@@ -15,23 +15,7 @@ const combineSockets = (server) => {
         }
     })
 
-    io.use((socket, next) => {
-
-        const token = socket.handshake.auth.token
-        if (!token) {
-            return next(new Error("No Token Provided"))
-        }
-
-        try {
-            const decoded = jwt.verify(token, process.env.SECRET_KEY)
-            socket.username = decoded.username
-            next()
-
-        } catch (err) {
-            return next(new Error("Authentication failed: Invalid Token"));
-        }
-        
-    })
+    io.use(authSocket)
 
     io.on("connection", (socket) => {
 

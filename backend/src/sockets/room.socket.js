@@ -1,15 +1,17 @@
 const roomSocket = (io, socket) => {
 
-    socket.on('joinRoom', ({ userId, secondUserId }) => {
+    socket.on('joinRoom', ({ receiver }) => {
 
-        const roomName = `private_${userId}_${secondUserId}`
+        const sortedUserIds = [socket.userid, receiver].sort()
+        const roomName = `private_${sortedUserIds[0]}_${sortedUserIds[1]}`
         socket.join(roomName)
 
     })
 
-    socket.on('leaveRoom', ({ userId, secondUserId }) => {
+    socket.on('leaveRoom', ({ receiver }) => {
 
-        const roomName = `private_${userId}_${secondUserId}`
+        const sortedUserIds = [socket.userid, receiver].sort()
+        const roomName = `private_${sortedUserIds[0]}_${sortedUserIds[1]}`
         socket.leave(roomName)
         
     })
