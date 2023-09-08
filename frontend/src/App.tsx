@@ -3,8 +3,10 @@ import { ThemeEnum, useThemeContext } from "./contexts/Theme.context"
 import { darkTheme, lightTheme } from "./themes/Theme.styles"
 import { Navigate, RouterProvider } from "react-router"
 import { createBrowserRouter } from "react-router-dom"
+
 import SignIn from "./containers/user/SignIn"
 import SignUp from "./containers/user/SignUp"
+import Home from "./containers/home/Home"
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -88,7 +90,7 @@ export default function App() {
         },
         {
             path: '/',
-            element: <div></div>
+            element: <Home />
         },
         {
             path: '*',
