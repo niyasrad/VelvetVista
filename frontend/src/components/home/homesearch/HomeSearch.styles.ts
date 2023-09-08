@@ -1,0 +1,44 @@
+import { styled } from "styled-components"
+
+export const HomeSearchWrapper = styled.div`
+    width: 50rem;
+    max-width: 100%;
+    min-height: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: none;
+    padding-left: 2rem;
+    box-sizing: border-box;
+    justify-content: space-between;
+    background: ${ props => props.theme.glassGradient };
+    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+`
+
+export const HomeSearchInput = styled.input`
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    color: ${ props => props.theme.text };
+    font-size: 1em;
+    font-weight: 500;
+`
+
+export const HomeSearchButton = styled.button<{ $usernameExists: boolean }>`
+    width: 10%;
+    min-width: 5rem;
+    height: 100%;
+    border: none;
+    border-radius: 1rem;
+    outline: none;
+    color: ${ props => props.theme.text };
+    background: ${ props => props.theme.glassGradient };
+    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: ${ props => props.$usernameExists ? 400 : 600 };
+    opacity: ${ props => props.$usernameExists ? 1 : 0.2 };
+    transition: all 0.3s ease-in-out;
+`
