@@ -15,7 +15,20 @@ const roomSocket = (io, socket) => {
         socket.leave(roomName)
         
     })
+    
+    socket.on('joinLobby', () => {
 
+        const roomName = `private_${socket.userid}_lobby`
+        socket.join(roomName)
+
+    })
+
+    socket.on('leaveLobby', () => {
+
+        const roomName = `private_${socket.userid}_lobby`
+        socket.leave(roomName)
+        
+    })
 
 }
 
