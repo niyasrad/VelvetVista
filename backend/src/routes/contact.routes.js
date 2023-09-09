@@ -4,6 +4,37 @@ const User = require('../models/user.model')
 const Message = require('../models/message.model')
 const authVer = require('../utils/auth.utils')
 
+router.get('/getuser', authVer, async (req, res) => {
+
+    const user = await User.findOne({ username: req.username })
+
+    if (!user) {
+        return res.status(400).json({
+            message: "User not found!"
+        })
+    }
+
+    if (user.username == req.query.username) {
+        return res.status(400).json({
+            message: "You cannot add yourself!"
+        })
+    }
+
+    const findUser = await User.findOne({ username: req.query.username })
+
+    if (!findUser) {
+        return res.status(400).json({
+            message: "User not found!"
+        })
+    }
+
+    return res.status(200).json({
+        userID: findUser._id,
+        username: findUser.username
+    })
+
+})
+
 router.get('/chats', authVer, async (req, res) => {
 
     const user = await User.findOne({ username: req.username })
