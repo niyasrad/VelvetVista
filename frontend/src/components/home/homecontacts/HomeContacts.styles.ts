@@ -6,7 +6,6 @@ export const HomeContactsWrapper = styled.div`
     align-items: flex-start;
     justify-content: center;
     gap: 2rem;
-    padding: 2rem;
     box-sizing: border-box;
     height: 100%;
     max-height: 100%;
@@ -17,8 +16,9 @@ export const HomeContactsChats = styled.div`
     flex-direction: column;
     width: 50%;
     height: 100%;
-    overflow-y: auto;
     gap: 2rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 
     @media only screen and (max-width: 690px) {
         width: 100%;

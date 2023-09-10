@@ -26,7 +26,7 @@ export default function Home() {
                 setting="hallone"
             />
             <HomeContent>
-                { <HomeSearch />}
+                { isLoggedIn && <HomeSearch />}
                 <HomeRest>
                     <Glass children={<HomeContacts />} />
                 </HomeRest>

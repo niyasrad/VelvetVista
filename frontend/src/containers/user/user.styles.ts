@@ -2,12 +2,15 @@ import { styled } from "styled-components";
 
 export const SignWrapper = styled.div`
     width: 100%;
+    height: 100%;
     padding: 2rem 0;
     box-sizing: border-box;
 `
 
 export const SignContent = styled.div`
     width: 60%;
+    height: 80%;
+    max-height: 80%;
     max-width: 80rem;
     margin: 3rem auto;
 
@@ -19,18 +22,20 @@ export const SignContent = styled.div`
 
     @media only screen and (max-width: 990px) {
         width: 100%;
+        height: 90%;
+        max-height: 90%;
     }
 `
 
 export const SignerInsance = styled.div`
-    height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    padding: 3rem 0;
+    padding: 3rem 1rem;
     gap: 2rem;
     color: #9F9F9F;
+    text-align: center;
 
     a {
         text-decoration: none;
@@ -54,7 +59,7 @@ export const SignFieldInstance = styled.input`
     box-sizing: border-box;
     color: #9F9F9F;
     width: 20rem;
-    max-width: 80%;
+    max-width: 90%;
     border: none;
     box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25);
     font-size: 1em;
@@ -68,7 +73,7 @@ export const SignFieldSubmit = styled.button`
     padding: 1rem;
     color: ${ props => props.theme.text };
     width: 18rem;
-    max-width: 85%;
+    max-width: 100%;
     border: none;
     box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25);
     font-size: 1.1em;
