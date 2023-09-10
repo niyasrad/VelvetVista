@@ -5,11 +5,12 @@ const messageSocket = (io, socket) => {
 
     socket.on('sendMessage', async ({ receiver, content }) => {
 
-        const user = await User.findOne({ username: socket.username })
+        const userAccount = await User.findOne({ username: socket.username })
+        const receiverAccount = await User.findById(receiver)
 
         const roomName = `private_${socket.userid}_${receiver}`
         const lobbyNameOne = `private_${receiver}_lobby`
-        const lobbyNameTwo = `private_${socket.userid}_lobby}`
+        const lobbyNameTwo = `private_${socket.userid}_lobby`
 
         const newMessage = new Message({
             sender: socket.userid,
@@ -18,16 +19,26 @@ const messageSocket = (io, socket) => {
         })
         await newMessage.save()
 
-        if (!user.previousContacts.includes(receiver)) {
-            user.previousContacts.push(receiver)
-            await user.save()
+        if (!userAccount.previousContacts.includes(receiver)) {
+            userAccount.previousContacts.push(receiver)
+            await userAccount.save()
+        }
+        if (!receiverAccount.previousContacts.includes(socket.userid)) {    
+            receiverAccount.previousContacts.push(socket.userid)
+            await receiverAccount.save()
         }
 
-        io
+        io 
         .to(roomName)
         .to(lobbyNameOne)
         .to(lobbyNameTwo)
-        .emit('receiveMessage', { sender: socket.userid , receiver, content })
+        .emit('receiveMessage', { 
+            sender: socket.userid,
+            senderName: userAccount.username,
+            receiver,
+            receiverName: receiverAccount.username,
+            content 
+        })
 
     })
 

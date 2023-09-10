@@ -66,7 +66,7 @@ router.get('/chats', authVer, async (req, res) => {
                 userID: contact,
                 name: contactUser.username,
                 message: lastMessage.content,
-                sentByUser: lastMessage.sender == user._id
+                sentByUser: lastMessage.sender.equals(user._id)
             })
         }
 

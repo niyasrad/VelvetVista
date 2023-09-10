@@ -7,13 +7,15 @@ import { HomeContactsWrapper, HomeContactsChats, HomeContactsNone } from "./Home
 import { useGlobalContext } from "../../../contexts/Global.context"
 import axios from "axios"
 import { toast } from "react-toastify"
+import { io } from "socket.io-client"
 
 export function HomeContacts() {
 
     const [previousContacts, setPreviousContacts] = useState<Array<PrevChatProps>>([])
     const [loading, setLoading] = useState<boolean>(true)
+    const token = localStorage.getItem('token')
 
-    const { isLoggedIn } = useGlobalContext()
+    const { username, isLoggedIn } = useGlobalContext()
 
     useEffect(() => {
 
@@ -32,6 +34,56 @@ export function HomeContacts() {
         })
 
     }, [isLoggedIn])
+
+    useEffect(() => {
+
+        if (!token || !isLoggedIn || loading) {
+            return
+        }
+
+        const socket = io(import.meta.env.VITE_BASE_API, { extraHeaders: { token }})
+
+        socket.on('connect', () => {
+            socket.emit('joinLobby')
+        })
+        
+        socket.on('receiveMessage', (data) => {
+
+            let newContacts = [...previousContacts]
+            let newContact = newContacts.find((contact) => (contact.userID === data.sender || contact.userID === data.receiver))
+
+            if (!newContact) {
+
+                newContacts.unshift({
+                    userID: data.sender,
+                    name: data.senderName,
+                    message: data.content,
+                    sentByUser: data.senderName === username
+                })
+                setPreviousContacts(newContacts)
+                return
+
+            }
+
+            newContact = {
+                ...newContact,
+                message: data.content,
+                sentByUser: data.sender !== newContact?.userID
+            }
+            newContacts = [
+                newContact,
+                ...previousContacts.filter((contact) => contact.userID !== data.sender && contact.userID !== data.receiver),
+            ]
+
+            setPreviousContacts(newContacts)
+
+        })
+
+        return () => { 
+            socket.disconnect()
+        }
+
+    }, [isLoggedIn, loading])
 
     return (
         <HomeContactsWrapper>
