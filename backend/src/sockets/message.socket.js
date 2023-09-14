@@ -8,7 +8,8 @@ const messageSocket = (io, socket) => {
         const userAccount = await User.findOne({ username: socket.username })
         const receiverAccount = await User.findById(receiver)
 
-        const roomName = `private_${socket.userid}_${receiver}`
+        const sortedUserIds = [socket.userid, receiver].sort()
+        const roomName = `private_${sortedUserIds[0]}_${sortedUserIds[1]}`
         const lobbyNameOne = `private_${receiver}_lobby`
         const lobbyNameTwo = `private_${socket.userid}_lobby`
 
@@ -40,6 +41,16 @@ const messageSocket = (io, socket) => {
             content 
         })
 
+    })
+
+    socket.on('typing', ({ receiver }) => {
+        
+        const sortedUserIds = [socket.userid, receiver].sort()
+        const roomName = `private_${sortedUserIds[0]}_${sortedUserIds[1]}`
+        const lobbyNameOne = `private_${receiver}_lobby`
+
+        socket.to(roomName).to(lobbyNameOne).emit('typing', { sender: socket.userid })
+    
     })
 
 }
