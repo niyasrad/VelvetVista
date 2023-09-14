@@ -1,0 +1,83 @@
+import { motion } from "framer-motion";
+import styled from "styled-components";
+
+export const ChatWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+`
+
+export const ChatContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+    width: 90%;
+    margin: auto;
+    max-width: 80rem;
+    border-radius: 2rem;
+    padding: 2rem 3rem;
+    box-sizing: border-box;
+    background: ${props => props.theme.glassGradient};
+    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`
+
+export const ChatTitle = styled.p`
+    font-weight: 500;
+    font-size: 0.9em;
+    color: ${props => props.theme.text};
+
+    .chat__title {
+        font-weight: 900;
+        font-size: 2em;
+    }
+`
+
+export const ChatIndicator = styled(motion.div)`
+    min-height: 2rem;
+    color: ${ props => props.theme.text };
+    font-weight: 500;
+    font-size: 1em;
+
+    .chat__title {
+        font-weight: 900;
+        font-size: 1.2em;
+    }
+`
+
+export const ChatEntry = styled.div`
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    min-height: 3rem;
+    box-sizing: border-box;
+    background: ${ props => props.theme.glassGradient };
+    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+
+    input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        padding-left: 1rem;
+        outline: none;
+        background: none;
+        color: ${ props => props.theme.text };
+        font-size: 1em;
+        font-weight: 500;
+    }
+    button {
+        width: 10%;
+        min-width: 5rem;
+        height: 100%;
+        border: none;
+        border-radius: 1rem;
+        outline: none;
+        color: ${ props => props.theme.text };
+        background: ${ props => props.theme.glassGradient };
+        box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        font-size: 1em;
+    }
+`

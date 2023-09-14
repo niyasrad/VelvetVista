@@ -1,12 +1,22 @@
+import { motion } from "framer-motion";
 import { styled } from "styled-components";
+
+export const MessageBox = styled(motion.div)<{ $percept: string }>`
+    display: flex;
+    width: 100%;
+    justify-content: ${props => (props.$percept === 'reader' ? 'flex-start' : 'flex-end')};
+`
 
 export const MessageWrapper = styled.div<{ $percept: string }>`
     max-width: 80%;
     background: ${ props => props.theme.messageGradient };
+    color: ${ props => props.theme.background };
+    font-weight: 600;
+    font-size: 1.1em;
+    word-break: break-all;
     padding: 2rem;
     box-sizing: border-box;
-    float: ${ props => props.$percept === 'reader' ? 'left' : 'right' };
-    border-radius: ${ props => props.$percept === 'reader' ? '0.5rem 2rem 0.5rem 0.5rem' : '0.5rem 0.5rem 0.5rem 2rem' };
+    border-radius: ${ props => props.$percept === 'reader' ? '0.5rem 0.5rem 2rem 0.5rem' : '0.5rem 0.5rem 0.5rem 2rem' };
 
     .message__left {
         text-align: left;

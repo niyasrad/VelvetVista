@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { useLayoutEffect, useState } from "react"
 import axios from "axios"
+import Chat from "./containers/chat/Chat"
 
 function AppWrapper({ children } : { children: React.ReactNode }) {
 
@@ -102,6 +103,10 @@ export default function App() {
         {
             path: '/',
             element: <Home />
+        },
+        {
+            path: '/chat/:chatID',
+            element: <Chat />
         },
         {
             path: '*',

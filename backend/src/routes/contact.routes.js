@@ -103,6 +103,7 @@ router.get('/messages', authVer, async (req, res) => {
             }).sort({ timestamp: 1 })
     
             return res.status(200).json({
+                username: otherUser.username,
                 messages: messages
             })
     
