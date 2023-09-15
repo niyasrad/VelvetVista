@@ -5,7 +5,7 @@ export const SignBGWrapper = styled.div`
     width: 100%;
     height: 100%;
     overflow: hidden;
-    position: absolute;
+    position: fixed;
     background-color: ${ props => props.theme.background };
     z-index: -1;
     top: 0;

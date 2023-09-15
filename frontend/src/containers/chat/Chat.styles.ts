@@ -21,12 +21,33 @@ export const ChatContent = styled.div`
     box-sizing: border-box;
     background: ${props => props.theme.glassGradient};
     box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    @media only screen and (max-width: 990px) {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 1rem 2rem;
+    }
+`
+
+export const ChatOpener = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+        color: ${props => props.theme.text};
+    }
 `
 
 export const ChatTitle = styled.p`
     font-weight: 500;
     font-size: 0.9em;
     color: ${props => props.theme.text};
+    min-height: 3rem;
 
     .chat__title {
         font-weight: 900;

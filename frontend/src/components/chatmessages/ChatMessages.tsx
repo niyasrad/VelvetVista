@@ -1,9 +1,11 @@
 import { useParams } from "react-router";
-import Message, { Percepts } from "../message/Message";
-import { ChatMessagesWrapper } from "./ChatMessages.styles";
 import { useRef, useEffect } from 'react'
 
-export default function ChatMessages({ messages }: { messages : Array<any> }) {
+import Message, { Percepts } from "../message/Message";
+import { ChatMessagesWrapper } from "./ChatMessages.styles";
+import { MessageProps } from "../../containers/chat/Chat";
+
+export default function ChatMessages({ messages }: { messages : Array<MessageProps> }) {
     
     const { chatID } = useParams()
     const messageRef = useRef<HTMLDivElement>(null)
