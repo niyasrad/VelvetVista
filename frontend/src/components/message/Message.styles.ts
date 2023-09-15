@@ -13,8 +13,8 @@ export const MessageWrapper = styled.div<{ $percept: string }>`
     color: ${ props => props.theme.background };
     font-weight: 600;
     font-size: 1.1em;
-    word-break: break-all;
-    padding: 2rem;
+    word-break: break-word;
+    padding: 1.5rem;
     box-sizing: border-box;
     border-radius: ${ props => props.$percept === 'reader' ? '0.5rem 0.5rem 2rem 0.5rem' : '0.5rem 0.5rem 0.5rem 2rem' };
 

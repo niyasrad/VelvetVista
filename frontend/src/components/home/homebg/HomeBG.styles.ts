@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
 export const HomeBGWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
