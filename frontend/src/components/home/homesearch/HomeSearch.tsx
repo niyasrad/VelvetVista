@@ -55,7 +55,7 @@ export function HomeSearch() {
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Enter Their Username"
+                placeholder="Enter Username"
             />
             <HomeSearchButton
                 $usernameExists={usernameExists}
