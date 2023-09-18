@@ -6,14 +6,16 @@ export const ChatWrapper = styled.div`
     flex-direction: column;
     height: 100%;
     width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
 `
 
 export const ChatContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 80%;
-    width: 90%;
+    height: 100%;
+    width: 80%;
     margin: auto;
     max-width: 80rem;
     border-radius: 2rem;
@@ -33,6 +35,7 @@ export const ChatContent = styled.div`
 export const ChatOpener = styled.div`
     display: flex;
     align-items: center;
+    min-height: 3rem;
     gap: 0.5rem;
 
     svg {

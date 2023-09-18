@@ -5,9 +5,17 @@ export const HomeWrapper = styled.div`
     height: 100vh;
     padding: 1rem;
     box-sizing: border-box;
+`
 
-    @media only screen and (max-width: 990px) {
-        padding: 0;
+export const HomeTitle = styled.div`
+    font-weight: 500;
+    font-size: 0.9em;
+    color: ${props => props.theme.text};
+    min-height: 3rem;
+
+    .home__title {
+        font-weight: 900;
+        font-size: 2em;
     }
 `
 
@@ -18,23 +26,16 @@ export const HomeContent = styled.div`
     max-height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 2rem 3rem;
     box-sizing: border-box;
-    gap: 2rem;
+    gap: 1rem;
     background: ${ props => props.theme.glassGradient};
     border-radius: 2rem;
     margin: auto;
 
-    @media only screen and (max-width: 690px) {
-        width: 95%;
-        padding: 1.5rem;
+    @media only screen and (max-width: 990px) {
+        width: 100%;
+        padding: 2.5rem 3rem;
+        border-radius: 0;
     }
 `
-
-export const HomeRest = styled.div`
-    overflow-y: auto;
-    min-height: calc(100% - 6rem);
-    width: 100%;
-    box-sizing: border-box;
-`
-

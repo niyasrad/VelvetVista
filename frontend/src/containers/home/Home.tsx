@@ -1,5 +1,5 @@
 
-import { HomeContent, HomeRest, HomeWrapper } from "./Home.styles";
+import { HomeContent, HomeTitle, HomeWrapper } from "./Home.styles";
 import Glass from "../../components/glass/Glass";
 import HomeBG from "../../components/home/homebg/HomeBG";
 
@@ -8,10 +8,11 @@ import { HomeContacts } from "../../components/home/homecontacts/HomeContacts";
 import { useEffect } from "react";
 import { useGlobalContext } from "../../contexts/Global.context";
 import { useNavigate } from "react-router";
+import DBar from "../../components/dbar/DBar";
 
 export default function Home() {
 
-    const { isLoading, isLoggedIn } = useGlobalContext()
+    const { username, isLoading, isLoggedIn } = useGlobalContext()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -26,10 +27,11 @@ export default function Home() {
                 setting="hallone"
             />
             <HomeContent>
+                <DBar>
+                    <HomeTitle>Welcome back, <span className="home__title">{username}</span></HomeTitle>
+                </DBar>
                 { isLoggedIn && <HomeSearch />}
-                <HomeRest>
-                    <Glass children={<HomeContacts />} />
-                </HomeRest>
+                <Glass children={<HomeContacts />} />
             </HomeContent>
         </HomeWrapper>
     )

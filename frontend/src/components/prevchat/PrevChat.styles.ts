@@ -19,14 +19,15 @@ export const PrevChatWrapper = styled.div`
 `
 
 export const PrevChatEmotion = styled.img`
-    width: 5rem;
+    width: 4rem;
+    min-width: 4rem;
     max-width: 30%;
     object-fit: contain;
     height: 100%;
 `
 
 export const PrevChatContent = styled.div`
-    width: 100%;
+    min-width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
