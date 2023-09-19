@@ -22,7 +22,7 @@ export const ChatContent = styled.div`
     padding: 2rem 3rem;
     box-sizing: border-box;
     background: ${props => props.theme.glassGradient};
-    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: ${ props => props.theme.boxshadow };
 
     @media only screen and (max-width: 990px) {
         width: 100%;
@@ -77,7 +77,7 @@ export const ChatEntry = styled.div`
     min-height: 3rem;
     box-sizing: border-box;
     background: ${ props => props.theme.glassGradient };
-    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: ${ props => props.theme.boxshadow };
     border-radius: 1rem;
 
     input {
@@ -100,7 +100,7 @@ export const ChatEntry = styled.div`
         outline: none;
         color: ${ props => props.theme.text };
         background: ${ props => props.theme.glassGradient };
-        box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        box-shadow: ${ props => props.theme.boxshadow };
         cursor: pointer;
         font-size: 1em;
     }

@@ -11,7 +11,7 @@ export const HomeSearchWrapper = styled.div`
     box-sizing: border-box;
     justify-content: space-between;
     background: ${ props => props.theme.glassGradient };
-    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: ${ props => props.theme.boxshadow };
     border-radius: 1rem;
 `
 
@@ -35,7 +35,7 @@ export const HomeSearchButton = styled.button<{ $usernameExists: boolean }>`
     outline: none;
     color: ${ props => props.theme.text };
     background: ${ props => props.theme.glassGradient };
-    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: ${ props => props.theme.boxshadow };
     cursor: pointer;
     font-size: 1em;
     font-weight: ${ props => props.$usernameExists ? 400 : 600 };

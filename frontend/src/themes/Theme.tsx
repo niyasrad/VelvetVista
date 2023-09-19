@@ -1,17 +1,18 @@
 import React, { useLayoutEffect, useState } from "react";
-import { ThemeContext } from "styled-components";
-import { ThemeEnum } from "../contexts/Theme.context";
+import { ThemeContext, ThemeEnum } from "../contexts/Theme.context";
 
 export default function Theme({ children }: { children : React.ReactNode }) {
 
-    const [theme, setTheme] = useState<string>('light')
+    const [theme, setTheme] = useState<ThemeEnum>(ThemeEnum.LIGHT)
 
     const toggleTheme = () => {
         if (theme === ThemeEnum.LIGHT) {
             setTheme(ThemeEnum.DARK)
+            localStorage.setItem('theme', 'dark')
             return
         } 
         setTheme(ThemeEnum.LIGHT)
+        localStorage.setItem('theme', 'light')
     }
 
     useLayoutEffect(() => {
