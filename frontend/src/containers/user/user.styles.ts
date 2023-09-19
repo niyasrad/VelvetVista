@@ -61,7 +61,7 @@ export const SignFieldInstance = styled.input`
     width: 20rem;
     max-width: 90%;
     border: none;
-    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25);
+    box-shadow: ${ props => props.theme.boxshadow };
     font-size: 1em;
     font-weight: 400;
 `
@@ -75,7 +75,7 @@ export const SignFieldSubmit = styled.button`
     width: 18rem;
     max-width: 100%;
     border: none;
-    box-shadow: 0px 4px 21px -3px rgba(0, 0, 0, 0.25);
+    box-shadow: ${ props => props.theme.boxshadow };
     font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;
