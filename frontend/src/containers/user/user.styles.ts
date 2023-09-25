@@ -5,6 +5,7 @@ export const SignWrapper = styled.div`
     height: 100%;
     padding: 2rem 0;
     box-sizing: border-box;
+    background-color: ${props => props.theme.wrapperBG};
 `
 
 export const SignContent = styled.div`
@@ -12,7 +13,7 @@ export const SignContent = styled.div`
     height: 80%;
     max-height: 80%;
     max-width: 80rem;
-    margin: 3rem auto;
+    margin: auto;
 
     img {
         height: 2rem;
@@ -61,21 +62,19 @@ export const SignFieldInstance = styled.input`
     width: 20rem;
     max-width: 90%;
     border: none;
-    box-shadow: ${ props => props.theme.boxshadow };
     font-size: 1em;
     font-weight: 400;
 `
 
 export const SignFieldSubmit = styled.button`
     background: ${ props => props.theme.messageGradient };
-    border-radius: 2rem;
+    border-radius: 1rem;
     text-align: center;
     padding: 1rem;
     color: ${ props => props.theme.text };
     width: 18rem;
     max-width: 100%;
     border: none;
-    box-shadow: ${ props => props.theme.boxshadow };
     font-size: 1.1em;
     font-weight: 500;
     cursor: pointer;

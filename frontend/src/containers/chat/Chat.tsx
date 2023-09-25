@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-import HomeBG from "../../components/home/homebg/HomeBG";
 import { ChatContent, ChatEntry, ChatIndicator, ChatOpener, ChatTitle, ChatWrapper } from "./Chat.styles";
 import ChatMessages from "../../components/chatmessages/ChatMessages";
 import { useGlobalContext } from "../../contexts/Global.context";
@@ -119,9 +118,6 @@ export default function Chat() {
 
     return (
         <ChatWrapper>
-            <HomeBG 
-                setting="hallone"
-            />
             <ChatContent>
                 <DBar>
                     <ChatOpener>

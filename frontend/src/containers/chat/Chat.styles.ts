@@ -8,6 +8,7 @@ export const ChatWrapper = styled.div`
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
+    background-color: ${props => props.theme.wrapperBG};
 `
 
 export const ChatContent = styled.div`
@@ -18,11 +19,10 @@ export const ChatContent = styled.div`
     width: 80%;
     margin: auto;
     max-width: 80rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     padding: 2rem 3rem;
     box-sizing: border-box;
     background: ${props => props.theme.glassGradient};
-    box-shadow: ${ props => props.theme.boxshadow };
 
     @media only screen and (max-width: 990px) {
         width: 100%;
@@ -50,11 +50,16 @@ export const ChatTitle = styled.p`
     font-weight: 500;
     font-size: 0.9em;
     color: ${props => props.theme.text};
-    min-height: 3rem;
 
     .chat__title {
+        display: block;
         font-weight: 900;
         font-size: 2em;
+        height: 100%;
+        max-width: 20vw;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 `
 
@@ -76,8 +81,8 @@ export const ChatEntry = styled.div`
     gap: 1rem;
     min-height: 3rem;
     box-sizing: border-box;
-    background: ${ props => props.theme.glassGradient };
-    box-shadow: ${ props => props.theme.boxshadow };
+    background: ${ props => props.theme.wrapperBG };
+    overflow: hidden;
     border-radius: 1rem;
 
     input {
@@ -87,20 +92,29 @@ export const ChatEntry = styled.div`
         padding-left: 1rem;
         outline: none;
         background: none;
-        color: ${ props => props.theme.text };
+        color: ${ props => props.theme.background };
         font-size: 1em;
         font-weight: 500;
     }
+
+    ::placeholder {
+        color: ${ props => props.theme.background };
+        opacity: 1;
+    }
+
+    ::-ms-input-placeholder { 
+        color: ${ props => props.theme.background };
+    }
+
     button {
         width: 10%;
         min-width: 5rem;
         height: 100%;
         border: none;
-        border-radius: 1rem;
         outline: none;
-        color: ${ props => props.theme.text };
-        background: ${ props => props.theme.glassGradient };
-        box-shadow: ${ props => props.theme.boxshadow };
+        color: ${ props => props.theme.background };
+        font-weight: 700;
+        background: ${ props => props.theme.text };
         cursor: pointer;
         font-size: 1em;
     }

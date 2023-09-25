@@ -11,8 +11,16 @@ export const HomeSearchWrapper = styled.div`
     box-sizing: border-box;
     justify-content: space-between;
     background: ${ props => props.theme.glassGradient };
-    box-shadow: ${ props => props.theme.boxshadow };
     border-radius: 1rem;
+
+    ::placeholder {
+        color: ${ props => props.theme.text };
+        opacity: 1;
+    }
+
+    ::-ms-input-placeholder { 
+        color: ${ props => props.theme.text };
+    }
 `
 
 export const HomeSearchInput = styled.input`
@@ -33,9 +41,8 @@ export const HomeSearchButton = styled.button<{ $usernameExists: boolean }>`
     border: none;
     border-radius: 1rem;
     outline: none;
-    color: ${ props => props.theme.text };
-    background: ${ props => props.theme.glassGradient };
-    box-shadow: ${ props => props.theme.boxshadow };
+    color: ${ props => props.theme.background };
+    background: ${ props => props.theme.messageGradient };
     cursor: pointer;
     font-size: 1em;
     font-weight: ${ props => props.$usernameExists ? 400 : 600 };

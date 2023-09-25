@@ -14,7 +14,7 @@ export const MessageWrapper = styled.div<{ $percept: string }>`
     font-weight: 600;
     font-size: 1.1em;
     word-break: break-word;
-    padding: 1.5rem;
+    padding: ${ props => props.$percept === 'reader' ? '1rem 3rem 1rem 1.5rem' : '1rem 1.5rem 1rem 3rem' };
     box-sizing: border-box;
     border-radius: ${ props => props.$percept === 'reader' ? '0.5rem 0.5rem 2rem 0.5rem' : '0.5rem 0.5rem 0.5rem 2rem' };
 
