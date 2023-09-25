@@ -5,6 +5,7 @@ export const HomeWrapper = styled.div`
     height: 100vh;
     padding: 1rem;
     box-sizing: border-box;
+    background-color: ${props => props.theme.wrapperBG};
 `
 
 export const HomeTitle = styled.div`
@@ -30,12 +31,12 @@ export const HomeContent = styled.div`
     box-sizing: border-box;
     gap: 1rem;
     background: ${ props => props.theme.glassGradient};
-    border-radius: 2rem;
+    border-radius: 1rem;
     margin: auto;
 
     @media only screen and (max-width: 990px) {
         width: 100%;
-        padding: 2.5rem 3rem;
+        padding: 2.5rem 1rem;
         border-radius: 0;
     }
 `

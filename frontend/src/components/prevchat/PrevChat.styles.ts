@@ -9,7 +9,6 @@ export const PrevChatWrapper = styled.div`
     box-sizing: border-box;
     border-radius: 0.5rem 0.5rem 2rem 0.5rem;
     background: ${ props => props.theme.messageGradient };
-    box-shadow: ${ props => props.theme.boxshadow };
     cursor: pointer;
 
     @media only screen and (max-width: 990px) {

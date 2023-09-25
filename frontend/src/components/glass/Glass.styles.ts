@@ -6,7 +6,11 @@ export const GlassWrapper = styled.div`
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    border-radius: 2rem;
+    border-radius: 1rem;
     box-sizing: border-box;
     background: ${ props => props.theme.glassGradient };
+
+    @media only screen and (max-width: 990px) {
+        border-radius: 0;
+    }
 `

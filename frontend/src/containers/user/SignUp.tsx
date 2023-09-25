@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { SignContent, SignFieldInstance, SignFieldSubmit, SignFieldsWrapper, SignWrapper, SignerInsance } from "./user.styles";
 import Glass from "../../components/glass/Glass";
-import SignBG from "../../components/signbg/SignBG";
 import { ThemeEnum, useThemeContext } from "../../contexts/Theme.context";
 
 import dark_logo from '../../assets/logo/logo-dark.svg'
@@ -95,7 +94,6 @@ export default function SignUp() {
     
     return (
         <SignWrapper>
-            <SignBG />
             <SignContent>
                 <Glass>
                     <SignerInsance>
