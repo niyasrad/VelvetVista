@@ -71,7 +71,7 @@ export const SignFieldSubmit = styled.button`
     border-radius: 1rem;
     text-align: center;
     padding: 1rem;
-    color: ${ props => props.theme.text };
+    color: ${ props => props.theme.background };
     width: 18rem;
     max-width: 100%;
     border: none;

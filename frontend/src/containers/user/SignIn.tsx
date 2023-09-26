@@ -22,6 +22,7 @@ function SignFields() {
     const handleSubmit: () => void = () => {
         if (!handleEmail || !password) {
             toast('Please fill the fields!')
+            return
         }
         const toastID = toast.loading("Logging in!")
         axios.post(import.meta.env.VITE_BASE_API + '/user/login', {
@@ -35,7 +36,7 @@ function SignFields() {
                 autoClose: 3000,
                 type: 'success'
             })
-            handleLogIn!(res.data.token)
+            handleLogIn!(res.data.token, res.data.username)
             navigate('/')
         })
         .catch((err) => {

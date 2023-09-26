@@ -94,7 +94,8 @@ router.post('/login', async (req, res) => {
 
         return res.status(200).json({
             message: "Logged into account!",
-            token
+            token,
+            username: findUser.username
         })
         
     } catch (err) {

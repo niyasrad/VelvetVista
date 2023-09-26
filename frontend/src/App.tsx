@@ -24,10 +24,11 @@ function AppWrapper({ children } : { children: React.ReactNode }) {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
-    const handleLogIn = (token: string) => {
+    const handleLogIn = (token: string, userHandle: string) => {
         
         localStorage.setItem('token', token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        setUsername(userHandle)
         setIsLoggedIn(true)
         setIsLoading(false)
 

@@ -6,9 +6,8 @@
     font-family: 'Urbanist', sans-serif;
 }
 
-body {
-    height: 100dvh;
-    height: 100vh;
+html, body {
+    height: 100%;
     width: 100%;
 }
 
