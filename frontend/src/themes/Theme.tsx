@@ -17,7 +17,7 @@ export default function Theme({ children }: { children : React.ReactNode }) {
 
     useLayoutEffect(() => {
         const cachedTheme = localStorage.getItem('theme')
-        if (theme) {
+        if (cachedTheme) {
             setTheme(cachedTheme as ThemeEnum)
         }
     }, [])

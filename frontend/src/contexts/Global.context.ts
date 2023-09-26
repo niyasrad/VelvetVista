@@ -7,7 +7,7 @@ export interface GlobalContextInterface {
     setUsername?: Dispatch<SetStateAction<string>>,
     setIsLoggedIn?: Dispatch<SetStateAction<boolean>>,
     setIsLoading?: Dispatch<SetStateAction<boolean>>,
-    handleLogIn?: (token: string) => void,
+    handleLogIn?: (token: string, userHandle: string) => void,
     handleSignOut?: () => void
 }
 
