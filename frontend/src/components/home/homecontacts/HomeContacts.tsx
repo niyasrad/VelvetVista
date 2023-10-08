@@ -7,7 +7,6 @@ import { HomeContactsWrapper, HomeContactsChats, HomeContactsNone } from "./Home
 import { useGlobalContext } from "../../../contexts/Global.context"
 import axios from "axios"
 import { toast } from "react-toastify"
-import { io } from "socket.io-client"
 
 export function HomeContacts() {
 
@@ -15,7 +14,7 @@ export function HomeContacts() {
     const [loading, setLoading] = useState<boolean>(true)
     const token = localStorage.getItem('token')
 
-    const { username, isLoggedIn } = useGlobalContext()
+    const { username, isLoggedIn, socketInstance } = useGlobalContext()
 
     useEffect(() => {
 
@@ -37,17 +36,36 @@ export function HomeContacts() {
 
     useEffect(() => {
 
-        if (!token || !isLoggedIn || loading) {
+        if (!token || !isLoggedIn || loading || !socketInstance) {
             return
         }
 
-        const socket = io(import.meta.env.VITE_BASE_API, { extraHeaders: { token }})
+        socketInstance.emit('joinLobby')
 
-        socket.on('connect', () => {
-            socket.emit('joinLobby')
+        socketInstance.on('userOnline', (data) => {
+    
+            let newContacts = [...previousContacts]
+            const newContact = newContacts.find((contact) => contact.userID === data.userID)
+            if (newContact) {
+                newContact.status = 'online'
+                setPreviousContacts(newContacts)
+            }
+    
         })
+
+        socketInstance.on('userOffline', (data) => {
+
+            let newContacts = [...previousContacts]
+            const newContact = newContacts.find((contact) => contact.userID === data.userID)
+            if (newContact) {
+                newContact.status = 'offline'
+                setPreviousContacts(newContacts)
+            }
+
+        })   
+
         
-        socket.on('receiveMessage', (data) => {
+        socketInstance.on('receiveMessage', (data) => {
 
             let newContacts = [...previousContacts]
             let newContact = newContacts.find((contact) => (contact.userID === data.sender || contact.userID === data.receiver))
@@ -58,7 +76,8 @@ export function HomeContacts() {
                     userID: data.sender,
                     name: data.senderName,
                     message: data.content,
-                    sentByUser: data.senderName === username
+                    sentByUser: data.senderName === username,
+                    status: data.status
                 })
                 setPreviousContacts(newContacts)
                 return
@@ -79,10 +98,6 @@ export function HomeContacts() {
 
         })
 
-        return () => { 
-            socket.disconnect()
-        }
-
     }, [isLoggedIn, loading])
 
     return (
@@ -97,6 +112,7 @@ export function HomeContacts() {
                             name={contact.name}
                             sentByUser={contact.sentByUser}
                             message={contact.message}
+                            status={contact.status}
                         />))
                     }
                 </HomeContactsChats>

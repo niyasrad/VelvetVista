@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router";
-import { Socket, io } from "socket.io-client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
@@ -29,11 +28,9 @@ export default function Chat() {
 
     const [isTyping, setIsTyping] = useState<boolean>(false)
 
-    const [socketInstance, setSocketInstance] = useState<Socket | null>(null)
-
     const token = localStorage.getItem('token')
 
-    const { isLoading ,isLoggedIn } = useGlobalContext()
+    const { isLoading ,isLoggedIn, socketInstance } = useGlobalContext()
     const navigate = useNavigate()
 
     const handleSend = () => {
@@ -86,33 +83,24 @@ export default function Chat() {
 
     useEffect(() => {
 
-        if (!token || !isLoggedIn || loading) {
+        if (!token || !isLoggedIn || loading || !socketInstance) {
             return
         }
 
-        const socket = io(import.meta.env.VITE_BASE_API, { extraHeaders: { token }})
-        setSocketInstance(socket)
-
-        socket.on('connect', () => {
-            socket.emit('joinRoom', { receiver: chatID })
-        })
+        socketInstance.emit('joinRoom', { receiver: chatID })
         
-        socket.on('receiveMessage', (data) => {
+        socketInstance.on('receiveMessage', (data) => {
             setMessages((prev: Array<MessageProps>) => {
                 return [...prev, data]
             })
         })
 
-        socket.on('typing', () => {
+        socketInstance.on('typing', () => {
             setIsTyping(true)
             setTimeout(() => {
                 setIsTyping(false)
             }, 2000)
         })
-
-        return () => { 
-            socket.disconnect()
-        }
 
     }, [isLoggedIn, loading])
 
