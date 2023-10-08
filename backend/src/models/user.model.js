@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    onlineStatus: [String],
     previousContacts: [
         {
             type: mongoose.Schema.Types.ObjectId,

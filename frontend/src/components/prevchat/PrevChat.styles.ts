@@ -17,12 +17,31 @@ export const PrevChatWrapper = styled.div`
     }
 `
 
-export const PrevChatEmotion = styled.img`
+export const PrevChatEmotion = styled.div<{ $status: 'online' | 'offline' }>`
     width: 4rem;
     min-width: 4rem;
     max-width: 30%;
-    object-fit: contain;
     height: 100%;
+    position: relative;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    &::after {
+        position: absolute;
+        content: '';
+        width: 1rem;
+        height: 1rem;
+        background: ${ props => props.$status === 'online' ? 'green' : 'grey' };
+        border: 1px solid ${ props => props.$status === 'online' ? 'grey' : 'white' };
+        border-radius: 50%;
+        bottom: 0.2rem;
+        right: 0.2rem;
+        transition: all ease-in-out 0.3s;
+    }
 `
 
 export const PrevChatContent = styled.div`

@@ -9,21 +9,26 @@ export interface PrevChatProps {
     userID: string,
     name: string,
     sentByUser: boolean,
-    message: string
+    message: string,
+    status: 'online' | 'offline'
 }
 
-export default function PrevChat({ userID, name, sentByUser, message }: PrevChatProps) {
+export default function PrevChat({ userID, name, sentByUser, message, status }: PrevChatProps) {
 
     const navigate = useNavigate()
 
     return (
         <PrevChatWrapper
             onClick={() => { navigate(`/chat/${userID}`) }}
-        >
+        >   
             <PrevChatEmotion
-                src={sentByUser ? sender : receiver}
-                alt="Emotion"
-            />
+                $status={status}
+            >
+                <img 
+                    src={sentByUser ? sender : receiver}
+                    alt="Emotion"
+                />
+            </PrevChatEmotion>
             <PrevChatContent>
                 <PrevChatName>{name}</PrevChatName>
                 <PrevChatMessage>{sentByUser && "You: "}{message}</PrevChatMessage>

@@ -17,12 +17,14 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useLayoutEffect, useState } from "react"
 import axios from "axios"
 import Chat from "./containers/chat/Chat"
+import { Socket, io } from "socket.io-client"
 
 function AppWrapper({ children } : { children: React.ReactNode }) {
 
     const [username, setUsername] = useState<string>('')
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [socketInstance, setSocketInstance] = useState<Socket | null>(null)
 
     const handleLogIn = (token: string, userHandle: string) => {
         
@@ -65,15 +67,33 @@ function AppWrapper({ children } : { children: React.ReactNode }) {
 
     }, [])
 
+    useLayoutEffect(() => {
+
+        const token = localStorage.getItem('token')
+        if (!token || !isLoggedIn || isLoading) {
+            return
+        }
+
+        const socket = io(import.meta.env.VITE_BASE_API, { extraHeaders: { token }})
+        setSocketInstance(socket)
+
+        return () => { 
+            socket.disconnect()
+        }
+
+    }, [isLoggedIn, isLoading])
+
     return (
         <GlobalContext.Provider
             value={{
                 username,
                 isLoggedIn,
                 isLoading,
+                socketInstance,
                 setUsername,
                 setIsLoggedIn,
                 setIsLoading,
+                setSocketInstance,
                 handleLogIn,
                 handleSignOut
             }}
