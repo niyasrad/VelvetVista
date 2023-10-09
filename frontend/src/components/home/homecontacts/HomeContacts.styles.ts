@@ -22,7 +22,7 @@ export const HomeContactsChats = styled.div`
     }
 `
 
-export const HomeContactsNone = styled.div<{ $loading ?: boolean, $noContacts ?: boolean }>`
+export const HomeContactsNone = styled.div<{ $noContacts ?: boolean }>`
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -43,6 +43,6 @@ export const HomeContactsNone = styled.div<{ $loading ?: boolean, $noContacts ?:
     }
 
     @media only screen and (max-width: 990px) {
-        display: ${ props => (props.$loading || props.$noContacts) ? 'flex' : 'none'};
+        display: ${ props => props.$noContacts ? 'flex' : 'none'};
     }
 `

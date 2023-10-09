@@ -7,6 +7,7 @@ import { ChatContent, ChatEntry, ChatIndicator, ChatOpener, ChatTitle, ChatWrapp
 import ChatMessages from "../../components/chatmessages/ChatMessages";
 import { useGlobalContext } from "../../contexts/Global.context";
 import DBar from "../../components/dbar/DBar";
+import Loading from "../../components/loading/Loading";
 
 
 export interface MessageProps {
@@ -56,7 +57,11 @@ export default function Chat() {
         .then((res) => {
             setChatter(res.data.username)
             setMessages(res.data.messages)
-            setLoading(false)
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 2500)
+
             if (inputRef.current) {
                 inputRef.current.focus();
             }
@@ -103,6 +108,8 @@ export default function Chat() {
         })
 
     }, [isLoggedIn, loading])
+
+    if (loading) return <Loading />
 
     return (
         <ChatWrapper>
