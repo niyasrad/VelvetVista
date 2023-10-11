@@ -77,8 +77,17 @@ function AppWrapper({ children } : { children: React.ReactNode }) {
         const socket = io(import.meta.env.VITE_BASE_API, { extraHeaders: { token }})
         setSocketInstance(socket)
 
+        setInterval(() => {
+            axios.get(import.meta.env.VITE_BASE_API + '/user/checkauth')
+            .then(() => {})
+            .catch(() => {
+                socket.disconnect()
+            })
+        }, 1000 * 60)
+
         return () => { 
             socket.disconnect()
+            setSocketInstance(null)
         }
 
     }, [isLoggedIn, isLoading])
