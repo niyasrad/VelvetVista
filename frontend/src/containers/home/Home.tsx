@@ -12,12 +12,15 @@ import Loading from "../../components/loading/Loading";
 import { useGlobalContext } from "../../contexts/Global.context";
 
 import { PrevChatProps } from "../../components/prevchat/PrevChat";
+import useTimeoutNavigation from "../../hooks/useTimeoutNavigation";
 
 
 export default function Home() {
 
     const { username, isLoading, isLoggedIn, socketInstance } = useGlobalContext()
     const navigate = useNavigate()
+
+    useTimeoutNavigation(1000 * 60 * 2, '/info/disconnect')
     
     const [loading, setLoading] = useState<boolean>(true)
     const [previousContacts, setPreviousContacts] = useState<Array<PrevChatProps>>([])

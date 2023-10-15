@@ -8,6 +8,7 @@ import ChatMessages from "../../components/chatmessages/ChatMessages";
 import { useGlobalContext } from "../../contexts/Global.context";
 import DBar from "../../components/dbar/DBar";
 import Loading from "../../components/loading/Loading";
+import useTimeoutNavigation from "../../hooks/useTimeoutNavigation";
 
 
 export interface MessageProps {
@@ -30,6 +31,8 @@ export default function Chat() {
     const [isTyping, setIsTyping] = useState<boolean>(false)
 
     const token = localStorage.getItem('token')
+
+    useTimeoutNavigation(1000 * 60 * 2, '/info/disconnect')
 
     const { isLoading ,isLoggedIn, socketInstance } = useGlobalContext()
     const navigate = useNavigate()

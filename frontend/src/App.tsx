@@ -18,6 +18,7 @@ import { useLayoutEffect, useState } from "react"
 import axios from "axios"
 import Chat from "./containers/chat/Chat"
 import { Socket, io } from "socket.io-client"
+import Info from "./containers/info/Info"
 
 function AppWrapper({ children } : { children: React.ReactNode }) {
 
@@ -137,6 +138,10 @@ export default function App() {
         {
             path: '/chat/:chatID',
             element: <Chat />
+        },
+        {
+            path: '/info/:infoID',
+            element: <Info />
         },
         {
             path: '*',
