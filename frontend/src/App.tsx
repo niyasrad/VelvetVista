@@ -31,6 +31,8 @@ function AppWrapper({ children } : { children: React.ReactNode }) {
         
         localStorage.setItem('token', token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        const socket = io(import.meta.env.VITE_BASE_API, { extraHeaders: { token }})
+        setSocketInstance(socket)
         setUsername(userHandle)
         setIsLoggedIn(true)
         setIsLoading(false)
@@ -91,7 +93,7 @@ function AppWrapper({ children } : { children: React.ReactNode }) {
             setSocketInstance(null)
         }
 
-    }, [isLoggedIn, isLoading])
+    }, [isLoading])
 
     return (
         <GlobalContext.Provider
