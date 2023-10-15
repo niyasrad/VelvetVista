@@ -8,7 +8,6 @@ const useTimeoutNavigation = (timeoutInMs: number, redirectPath: string) => {
     const { socketInstance, setSocketInstance } = useGlobalContext()
 
     useEffect(() => {
-
         if (!timeoutInMs || !redirectPath) return
 
         const onTimeout = () => {
@@ -16,7 +15,7 @@ const useTimeoutNavigation = (timeoutInMs: number, redirectPath: string) => {
                 socketInstance!.disconnect()
                 setSocketInstance!(null)
             }
-            setTimeout(() => navigate(redirectPath), 500)
+            navigate(redirectPath)
         }
         
         let timer: number = setTimeout(onTimeout, timeoutInMs)
@@ -43,7 +42,7 @@ const useTimeoutNavigation = (timeoutInMs: number, redirectPath: string) => {
             })
         }
 
-    }, [timeoutInMs, redirectPath])
+    }, [timeoutInMs, redirectPath, socketInstance])
 
 }
 

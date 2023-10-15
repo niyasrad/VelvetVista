@@ -2,8 +2,9 @@ import { InfoBar, InfoDesc, InfoTitle, InfoWrapper } from "./Info.styles";
 
 import { useNavigate, useParams } from "react-router";
 import Loader from "../../components/loader/Loader";
+import Loading from "../../components/loading/Loading";
 import { useGlobalContext } from "../../contexts/Global.context";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const InfoData = {
     disconnect: {
@@ -19,14 +20,32 @@ const InfoData = {
 export default function Info() {
 
     const { infoID } = useParams<{ infoID: keyof typeof InfoData }>()
-    const { socketInstance } = useGlobalContext()
+    const { socketInstance, isLoading, isLoggedIn } = useGlobalContext()
     const navigate = useNavigate()
+
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    }, [])
+
+    useEffect(() => {
+        if (!isLoading && !isLoggedIn) {
+            navigate('/signin')
+        }
+    }, [isLoading, isLoggedIn])
 
     useEffect(() => {
         if (socketInstance) {
             navigate('/')
         }
     }, [socketInstance])
+
+    if (loading) {
+        return <Loading />
+    }
 
     return (
         <InfoWrapper>
