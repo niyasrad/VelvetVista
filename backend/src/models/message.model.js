@@ -18,6 +18,11 @@ const messageSchema = mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now,
+    },
+    reply: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message',
+        default: null
     }
 })
 
