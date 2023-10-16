@@ -3,19 +3,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-import { ChatContent, ChatEntry, ChatIndicator, ChatOpener, ChatTitle, ChatWrapper } from "./Chat.styles";
+import { ChatContent, ChatEntry, ChatIndicator, ChatOpener, ChatStatus, ChatTitle, ChatWrapper } from "./Chat.styles";
 import ChatMessages from "../../components/chatmessages/ChatMessages";
 import { useGlobalContext } from "../../contexts/Global.context";
 import DBar from "../../components/dbar/DBar";
 import Loading from "../../components/loading/Loading";
 import useTimeoutNavigation from "../../hooks/useTimeoutNavigation";
+import ReplyBox from "../../components/replybox/ReplyBox";
 
 
 export interface MessageProps {
+    _id: string,
     sender: string,
     receiver: string,
     content: string,
-    timestamp: string
+    timestamp: string,
+    reply: string
 }
 
 export default function Chat() {
@@ -23,6 +26,7 @@ export default function Chat() {
     const { chatID } = useParams()
     const [chatter, setChatter] = useState('')
     const [loading, setLoading] = useState<boolean>(true)
+    const [replyID, setReplyID] = useState<string>('')
 
     const [messages, setMessages] = useState<Array<MessageProps>>([])
     const [message, setMessage] = useState<string>('')
@@ -39,9 +43,16 @@ export default function Chat() {
 
     const handleSend = () => {
         if (!socketInstance || message.trim() === '') return
-        socketInstance.emit('sendMessage', { receiver: chatID, content: message })
+        socketInstance.emit('sendMessage', { receiver: chatID, content: message, reply: replyID })
         setMessage('')
+        setReplyID('')
     }
+
+    useEffect(() => {
+        if (replyID !== '') {
+            inputRef.current?.focus()
+        }
+    }, [replyID])
 
     useEffect(() => {
         if (!isLoading && !isLoggedIn) {
@@ -76,6 +87,7 @@ export default function Chat() {
     useEffect(() => {
 
         if (!socketInstance) return
+        if (message.trim() === '') return
         socketInstance.emit('typing', { receiver: chatID })
         const handleEnter = (e: KeyboardEvent) => {
             if (e.key === 'Enter') {
@@ -87,7 +99,7 @@ export default function Chat() {
             document.removeEventListener('keydown', handleEnter)
         }
 
-    }, [message])
+    }, [message, replyID])
 
     useEffect(() => {
 
@@ -127,6 +139,7 @@ export default function Chat() {
                 </DBar>
                 <ChatMessages 
                     messages={messages}
+                    onReply={(id) => setReplyID(id)}
                 />
                 <ChatIndicator>
                     <AnimatePresence>
@@ -144,16 +157,27 @@ export default function Chat() {
                     }
                     </AnimatePresence>
                 </ChatIndicator>
-                <ChatEntry>
-                    <input 
-                        type="text" 
-                        value={message} 
-                        onChange={(e) => setMessage(e.target.value)}  
-                        placeholder="Type Something" 
-                        ref={inputRef}
-                    />
-                    <button onClick={handleSend}>Send</button>
-                </ChatEntry>
+                <ChatStatus>
+                    <AnimatePresence>
+                        {
+                            replyID !== '' &&
+                            <ReplyBox 
+                                content={messages.find((message) => message._id === replyID)?.content || ''}
+                                handleClose={() => setReplyID('')}
+                            />
+                        }
+                    </AnimatePresence>
+                    <ChatEntry>
+                        <input 
+                            type="text" 
+                            value={message} 
+                            onChange={(e) => setMessage(e.target.value)}  
+                            placeholder="Type Something" 
+                            ref={inputRef}
+                        />
+                        <button onClick={handleSend}>Send</button>
+                    </ChatEntry>
+                </ChatStatus>
             </ChatContent>
         </ChatWrapper>
     )

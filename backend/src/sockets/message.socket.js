@@ -3,7 +3,7 @@ const User = require('../models/user.model')
 
 const messageSocket = (io, socket) => {
 
-    socket.on('sendMessage', async ({ receiver, content }) => {
+    socket.on('sendMessage', async ({ receiver, content, reply }) => {
 
         const userAccount = await User.findOne({ username: socket.username })
         const receiverAccount = await User.findById(receiver)
@@ -16,7 +16,8 @@ const messageSocket = (io, socket) => {
         const newMessage = new Message({
             sender: socket.userid,
             receiver,
-            content
+            content,
+            reply: reply !== '' ? reply : null
         })
         await newMessage.save()
 
@@ -34,11 +35,14 @@ const messageSocket = (io, socket) => {
         .to(lobbyNameOne)
         .to(lobbyNameTwo)
         .emit('receiveMessage', { 
+            _id: newMessage._id,
             sender: socket.userid,
             senderName: userAccount.username,
             receiver,
             receiverName: receiverAccount.username,
-            content 
+            content,
+            timestamp: newMessage.timestamp,
+            reply: reply !== '' ? reply : null,
         })
 
     })

@@ -75,10 +75,14 @@ export const ChatIndicator = styled(motion.div)`
     }
 `
 
+export const ChatStatus = styled.div`
+    width: 100%;
+    position: relative;
+`
+
 export const ChatEntry = styled.div`
     width: 100%;
     display: flex;
-    gap: 1rem;
     min-height: 3rem;
     box-sizing: border-box;
     background: ${ props => props.theme.wrapperBG };
@@ -87,9 +91,9 @@ export const ChatEntry = styled.div`
 
     input {
         width: 100%;
-        height: 100%;
         border: none;
-        padding-left: 1rem;
+        padding: 0 2rem;
+        box-sizing: border-box;
         outline: none;
         background: none;
         color: ${ props => props.theme.background };
@@ -109,7 +113,6 @@ export const ChatEntry = styled.div`
     button {
         width: 10%;
         min-width: 5rem;
-        height: 100%;
         border: none;
         outline: none;
         color: ${ props => props.theme.background };
