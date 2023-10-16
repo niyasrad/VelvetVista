@@ -5,7 +5,7 @@ export const ReplyBoxWrapper = styled(motion.div)`
     position: absolute;
     display: flex;
     width: 100%;
-    bottom: 4rem;
+    bottom: 5rem;
     left: 0;
     right: 0;
     height: 6rem;
@@ -14,8 +14,11 @@ export const ReplyBoxWrapper = styled(motion.div)`
     align-items: center;
     background: ${ props => props.theme.messageGradient };
     color: ${ props => props.theme.background };
+    border: 2px solid ${ props => props.theme.background };
     box-sizing: border-box;
     border-radius: 1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     overflow: hidden;
 `
 
@@ -45,7 +48,7 @@ export const ReplyBoxContent = styled.div`
     }
 
     span {
-        font-size: 1.3em;
+        font-size: 1.2em;
         font-weight: 400;
     }
 `

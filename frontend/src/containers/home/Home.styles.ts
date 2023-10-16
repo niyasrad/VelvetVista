@@ -6,6 +6,10 @@ export const HomeWrapper = styled.div`
     padding: 1rem;
     box-sizing: border-box;
     background-color: ${props => props.theme.wrapperBG};
+
+    @media only screen and (max-width: 990px) {
+        padding: 0;
+    }
 `
 
 export const HomeTitle = styled.div`

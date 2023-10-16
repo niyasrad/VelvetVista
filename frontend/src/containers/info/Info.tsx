@@ -26,12 +26,11 @@ export default function Info() {
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
-    }, [])
-
-    useEffect(() => {
+        if (!isLoading) {
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000)
+        }
         if (!isLoading && !isLoggedIn) {
             navigate('/signin')
         }

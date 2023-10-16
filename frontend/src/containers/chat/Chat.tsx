@@ -48,11 +48,6 @@ export default function Chat() {
         setReplyID('')
     }
 
-    useEffect(() => {
-        if (replyID !== '') {
-            inputRef.current?.focus()
-        }
-    }, [replyID])
 
     useEffect(() => {
         if (!isLoading && !isLoggedIn) {
@@ -83,6 +78,22 @@ export default function Chat() {
         .catch(() => {})
 
     }, [])
+
+    useEffect(() => {
+
+        const focusOnInput = (_: KeyboardEvent) => {
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+        }
+
+        document.addEventListener('keydown', focusOnInput)
+
+        return () => {
+            document.removeEventListener('keydown', focusOnInput)
+        }
+
+    }, [inputRef])
 
     useEffect(() => {
 

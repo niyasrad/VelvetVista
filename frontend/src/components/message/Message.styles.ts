@@ -9,6 +9,7 @@ export const MessageBox = styled(motion.div)<{ $percept: string }>`
 `
 
 export const MessageWrapper = styled(motion.div)<{ $percept: string }>`
+    touch-action: none;
     max-width: 80%;
     background: ${ props => props.theme.messageGradient };
     color: ${ props => props.theme.background };
@@ -35,6 +36,7 @@ export const MessageReply = styled.div<{ $percept: string }>`
     border-radius: 1rem;;
     padding: 1rem;
     box-sizing: border-box;
+    user-select: none;
     border-radius: ${ props => props.$percept === 'reader' ? '1rem 1rem 1rem 0' : '1rem 1rem 0 1rem' };
 
     span {
