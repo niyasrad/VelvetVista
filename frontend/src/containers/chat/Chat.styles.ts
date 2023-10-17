@@ -9,6 +9,10 @@ export const ChatWrapper = styled.div`
     padding: 1rem;
     box-sizing: border-box;
     background-color: ${props => props.theme.wrapperBG};
+
+    @media only screen and (max-width: 990px) {
+        padding: 0;
+    }
 `
 
 export const ChatContent = styled.div`
@@ -28,7 +32,7 @@ export const ChatContent = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 0;
-        padding: 1rem 2rem;
+        padding: 1rem;
     }
 `
 
