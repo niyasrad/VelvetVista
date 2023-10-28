@@ -6,6 +6,7 @@ export const MessageBox = styled(motion.div)<{ $percept: string }>`
     flex-direction: column;
     align-items: ${props => (props.$percept === 'reader' ? 'flex-start' : 'flex-end')};
     width: 100%;
+    margin-bottom: 1rem;
 `
 
 export const MessageWrapper = styled(motion.div)<{ $percept: string }>`
