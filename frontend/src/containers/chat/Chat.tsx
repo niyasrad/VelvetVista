@@ -151,6 +151,7 @@ export default function Chat() {
                 <ChatMessages 
                     messages={messages}
                     onReply={(id) => setReplyID(id)}
+                    replyID={replyID}
                 />
                 <ChatIndicator>
                     <AnimatePresence>
